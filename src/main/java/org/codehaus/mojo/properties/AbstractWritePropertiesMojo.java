@@ -64,6 +64,18 @@ public abstract class AbstractWritePropertiesMojo
     private File outputFile;
 
     /**
+     * Prefix to be used before name of each property.
+     * Can be useful to extract properties by environment.
+     */
+    @Parameter
+    protected String keyPrefix = null;
+
+    public void setKeyPrefix( String keyPrefix )
+    {
+        this.keyPrefix = keyPrefix;
+    }
+
+    /**
      * @param properties {@link Properties}
      * @param file {@link File}
      * @throws MojoExecutionException {@link MojoExecutionException}
