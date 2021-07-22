@@ -31,7 +31,18 @@ public class WriteEnvProjectProperties
                 String key = (String) k;
                 String value = getProject().getProperties().getProperty(key);
                 if (key.startsWith(keyPrefix)) {
+                    // specific environment property always retrieved
                     projProperties.put(key.substring(keyPrefix.length()), value);
+                } else {
+                    // property with common prefix retrieved only if doesnt exit with
+                    // prefix specific to environment
+                    if (key.startsWith(commonKeyPrefix)) {
+                        String keyWithoutCommonPrefix = key.substring(commonKeyPrefix.length());
+                        String keyWithSpecificPrefix = keyPrefix + keyWithoutCommonPrefix;
+                        if (!getProject().getProperties().containsKey(keyWithSpecificPrefix)) {
+                            projProperties.put(keyWithoutCommonPrefix, value);
+                        }
+                    }
                 }
             }
         }

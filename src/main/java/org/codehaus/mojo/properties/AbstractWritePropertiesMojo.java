@@ -76,6 +76,19 @@ public abstract class AbstractWritePropertiesMojo
     }
 
     /**
+     * Prefix to be used before name of each property common to many environments.
+     * Can be useful to extract properties by environment.
+     * Vaue overriden by same Key for specific environment.
+     */
+    @Parameter( defaultValue = "*.")
+    protected String commonKeyPrefix = null;
+
+    public void setCommonKeyPrefix( String commonKeyPrefix )
+    {
+        this.commonKeyPrefix = commonKeyPrefix;
+    }
+
+    /**
      * @param properties {@link Properties}
      * @param file {@link File}
      * @throws MojoExecutionException {@link MojoExecutionException}
